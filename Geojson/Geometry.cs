@@ -6,38 +6,41 @@ using System.Threading.Tasks;
 
 namespace Geojson
 {
-    class Geojson
+    public class Geojson
     {
         public string type { get; set; }
-        //public geometry geometry { get; set; }
-        public List<geometry> geometries { get; set; }
-        public properties properties { get; set; }
+        public List<Feature> features  { get; set; }
     }
 
   
 
+    public class Feature {
+        public string type { get; set; }
+        public Geometry geometry { get; set; }
+        public Properties properties { get; set; }
 
-    class geometry{
-
-          public string type { get; set; }
-          public List<List<Double>> coordinates { get; set; }
 
 
+        
     }
 
-    class geometries
+
+    public class Geometry
     {
-
-        public List<geometry> geometriesArray { get; set; }
-
+        public string type { get; set; }
+        public List<List<Double>> coordinates { get; set; }
 
     }
 
 
-    class properties
-	{
-		public string name { get; set; }
-	}
+    public class Properties
+    {
+        public string name { get; set; }
+    }
+
+
+
+
 }
 
 
