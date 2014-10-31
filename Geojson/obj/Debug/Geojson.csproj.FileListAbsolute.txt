@@ -1,0 +1,8 @@
+c:\users\charles\documents\visual studio 2012\Projects\Geojson\Geojson\bin\Debug\Geojson.exe.config
+c:\users\charles\documents\visual studio 2012\Projects\Geojson\Geojson\bin\Debug\Geojson.exe
+c:\users\charles\documents\visual studio 2012\Projects\Geojson\Geojson\bin\Debug\Geojson.pdb
+c:\users\charles\documents\visual studio 2012\Projects\Geojson\Geojson\bin\Debug\Newtonsoft.Json.dll
+c:\users\charles\documents\visual studio 2012\Projects\Geojson\Geojson\bin\Debug\Newtonsoft.Json.xml
+c:\users\charles\documents\visual studio 2012\Projects\Geojson\Geojson\obj\Debug\Geojson.csprojResolveAssemblyReference.cache
+c:\users\charles\documents\visual studio 2012\Projects\Geojson\Geojson\obj\Debug\Geojson.exe
+c:\users\charles\documents\visual studio 2012\Projects\Geojson\Geojson\obj\Debug\Geojson.pdb
