@@ -14,3 +14,11 @@ C:\Users\Admin\Documents\GitHub\Geojson.net\Geojson\bin\Debug\Geojson.exe
 C:\Users\Admin\Documents\GitHub\Geojson.net\Geojson\bin\Debug\Geojson.pdb
 C:\Users\Admin\Documents\GitHub\Geojson.net\Geojson\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Admin\Documents\GitHub\Geojson.net\Geojson\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Charles\Documents\GitHub\Geojson.net\Geojson\bin\Debug\Geojson.exe.config
+C:\Users\Charles\Documents\GitHub\Geojson.net\Geojson\bin\Debug\Geojson.exe
+C:\Users\Charles\Documents\GitHub\Geojson.net\Geojson\bin\Debug\Geojson.pdb
+C:\Users\Charles\Documents\GitHub\Geojson.net\Geojson\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Charles\Documents\GitHub\Geojson.net\Geojson\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Charles\Documents\GitHub\Geojson.net\Geojson\obj\Debug\Geojson.exe
+C:\Users\Charles\Documents\GitHub\Geojson.net\Geojson\obj\Debug\Geojson.pdb
+C:\Users\Charles\Documents\GitHub\Geojson.net\Geojson\obj\Debug\Geojson.csprojResolveAssemblyReference.cache

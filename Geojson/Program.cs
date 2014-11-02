@@ -58,9 +58,9 @@ namespace Geojson
                         };
                         tempFeature.properties = new Properties()
                         {
-                            idMarcador = "Recorrido Mex-Toluca",
-                            velocidad = row["Latitud"].ToString(),
-                            fecha = row["Fecha"].ToString()
+                            idFeature = "Recorrido Mex-Toluca",
+                            Velocidad = row["Latitud"].ToString(),
+                            Fecha = row["Fecha"].ToString()
                             
                         };
 
@@ -81,12 +81,103 @@ namespace Geojson
             }
             return a;
         }
+
+
+        public Geojson getGeojson()
+        {
+            Geojson datos = new Geojson();
+
+            List<double> coordenadas = new List<double> {
+          -110.971301,   29.098372,
+          -110.971145,  29.097343,
+         -110.970974,   29.096256, 
+          -110.970809,   29.095217,
+           -110.970620,  29.094172,
+          -110.970447,   29.093150,
+        -110.970270,    29.092086, 
+          -110.970099,   29.091031,
+          -110.969927,   29.090140,
+        -110.968806,    29.089460, 
+         -110.967792,    29.089001,
+           -110.966786,  29.088598,
+         -110.965806,    29.088233,
+           -110.964837,  29.087841,
+          -110.963951,  29.087124, 
+         -110.962905,   29.086130, 
+            -110.961736, 29.085047,
+          -110.960322,   29.084261,
+          -110.959705 ,  29.083658
+        };
+
+            List<Feature> puntos = new List<Feature>();
+            int cont = 0;
+            for (int i = 0; i < coordenadas.Count - 1; i++)
+            {
+                Feature tempFeature = new Feature();
+                tempFeature.type = "Feature";
+                tempFeature.geometry = new Geometry
+                {
+                    type = "Point",
+                    coordinates = new List<double>(){
+                    
+                      coordenadas[i],
+                        coordenadas[i + 1]
+                        }
+                };
+                tempFeature.properties = new Properties()
+                {
+                    idFeature = "Marcador " +  cont,
+                    Velocidad = "venus",
+                    Fecha = DateTime.Today.ToString()
+
+                };
+
+                puntos.Add(tempFeature);
+                cont++;
+                i++;
+            }
+
+            List<List<Double>> coordenadasLinea = new List<List<double>>();
+
+            for (int i = 0; i < coordenadas.Count - 1; i++)
+            {
+                List<double> lista = new List<double>();
+                lista.Add(coordenadas[i]);
+                lista.Add(coordenadas[i + 1]);
+                coordenadasLinea.Add(lista);
+                i++;
+            }
+
+            Feature linea = new Feature();
+            linea.type = "Feature";
+            linea.geometry = new Geometry
+            {
+                type = "LineString",
+                coordinates = coordenadasLinea
+            };
+            linea.properties = new Properties()
+            {
+                idFeature = "Recorrido Mex-Toluca",
+                
+          
+
+            };
+
+            puntos.Add(linea);
+
+            datos.type = "FeatureCollection";
+            datos.features = puntos;
+
+            return datos;
+        }
+
+
         static void Main(string[] args)
         {
             Program jsona = new Program();
-            string json = JsonConvert.SerializeObject(jsona.obtener_DatosGPS(), Formatting.Indented);
+            string json = JsonConvert.SerializeObject(jsona.getGeojson(), Formatting.Indented);
 
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\Admin\\Documents\\Visual Studio 2013\\Projects\\DIDCOM_ASP\\DIDCOM_ASP\\js\\important.json"))
+            using (StreamWriter writer = new StreamWriter("C:\\Users\\Public\\Documents\\ISI\\important.json"))
             {
                 writer.Write(json);
 

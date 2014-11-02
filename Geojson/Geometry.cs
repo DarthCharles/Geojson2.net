@@ -9,36 +9,40 @@ namespace Geojson
     public class Geojson
     {
         public string type { get; set; }
-        public List<Feature> features  { get; set; }
+        public List<Feature> features { get; set; }
     }
 
-  
 
-    public class Feature {
+
+    public class Feature
+    {
         public string type { get; set; }
         public Geometry geometry { get; set; }
         public Properties properties { get; set; }
 
 
 
-        
+
     }
 
 
     public class Geometry
     {
         public string type { get; set; }
-        public List<Double> coordinates { get; set; }
+        public object coordinates { get; set; }
+        //public List<Double> coordinates { get; set; }
 
     }
 
 
     public class Properties
     {
-        public string idMarcador { get; set; }
-        public string velocidad { get; set; }
-        public string fecha { get; set; }
+        public string idFeature { get; set; }
+        public string Velocidad { get; set; }
+        public string Fecha { get; set; }
+
     }
+
 
 
 
