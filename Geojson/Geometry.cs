@@ -28,14 +28,16 @@ namespace Geojson
     public class Geometry
     {
         public string type { get; set; }
-        public List<List<Double>> coordinates { get; set; }
+        public List<Double> coordinates { get; set; }
 
     }
 
 
     public class Properties
     {
-        public string name { get; set; }
+        public string idMarcador { get; set; }
+        public string velocidad { get; set; }
+        public string fecha { get; set; }
     }
 
 
