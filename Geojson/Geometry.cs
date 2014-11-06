@@ -18,7 +18,7 @@ namespace Geojson
     {
         public string type { get; set; }
         public Geometry geometry { get; set; }
-        public Properties properties { get; set; }
+        public Object properties { get; set; }
 
 
 
@@ -37,14 +37,19 @@ namespace Geojson
 
     public class Properties
     {
-        public string idFeature { get; set; }
+        public string idRecorrido { get; set; }
         public string Velocidad { get; set; }
         public string Fecha { get; set; }
 
     }
 
 
+    public class PolylineProperties
+    {
+        public string idRecorrido { get; set; }
+        public string Color { get; set; }
 
+    }
 
 
 }

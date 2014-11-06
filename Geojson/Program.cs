@@ -58,7 +58,7 @@ namespace Geojson
                         };
                         tempFeature.properties = new Properties()
                         {
-                            idFeature = "Recorrido Mex-Toluca",
+                            idRecorrido = "Recorrido Mex-Toluca",
                             Velocidad = row["Latitud"].ToString(),
                             Fecha = row["Fecha"].ToString()
                             
@@ -126,7 +126,7 @@ namespace Geojson
                 };
                 tempFeature.properties = new Properties()
                 {
-                    idFeature = "Marcador " +  cont,
+                    idRecorrido = "123456 " +  cont,
                     Velocidad = "venus",
                     Fecha = DateTime.Today.ToString()
 
@@ -155,9 +155,10 @@ namespace Geojson
                 type = "LineString",
                 coordinates = coordenadasLinea
             };
-            linea.properties = new Properties()
+            linea.properties = new PolylineProperties()
             {
-                idFeature = "Recorrido Mex-Toluca",
+                idRecorrido = "Recorrido Mex-Toluca",
+                Color = "#12345"
                 
           
 
@@ -177,7 +178,7 @@ namespace Geojson
             Program jsona = new Program();
             string json = JsonConvert.SerializeObject(jsona.getGeojson(), Formatting.Indented);
 
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\Public\\Documents\\ISI\\important.json"))
+            using (StreamWriter writer = new StreamWriter("C:\\Carlos\\important.json"))
             {
                 writer.Write(json);
 
