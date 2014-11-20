@@ -67,10 +67,6 @@ namespace Geojson
                         puntos.Add(tempFeature);
                     }
 
-                   
-
-
-
                     a.type = "FeatureCollection";
                     a.features = puntos;
 
