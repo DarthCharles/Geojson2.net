@@ -56,9 +56,9 @@ namespace Geojson
                           Double.Parse(row["Latitud"].ToString())
                         }
                         };
-                        tempFeature.properties = new Properties()
+                        tempFeature.properties = new MarkerProperties()
                         {
-                            idRecorrido = "Recorrido Mex-Toluca",
+                            idMarker = "Recorrido Mex-Toluca",
                             Velocidad = row["Latitud"].ToString(),
                             Fecha = row["Fecha"].ToString()
                             
@@ -124,9 +124,9 @@ namespace Geojson
                         coordenadas[i + 1]
                         }
                 };
-                tempFeature.properties = new Properties()
+                tempFeature.properties = new MarkerProperties()
                 {
-                    idRecorrido = "123456 " +  cont,
+                    idMarker = "123456 " +  cont,
                     Velocidad = "venus",
                     Fecha = DateTime.Today.ToString()
 

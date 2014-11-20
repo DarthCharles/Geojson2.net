@@ -35,15 +35,6 @@ namespace Geojson
     }
 
 
-    public class Properties
-    {
-        public string idRecorrido { get; set; }
-        public string Velocidad { get; set; }
-        public string Fecha { get; set; }
-
-    }
-
-
     public class PolylineProperties
     {
         public string idRecorrido { get; set; }
@@ -52,16 +43,21 @@ namespace Geojson
     }
 
 
+    public class PolygonProperties
+    {
+        public string idGeocerca { get; set; }
+        public string Nombre { get; set; }
+        public string Color { get; set; }
+
+    }
+
+    public class MarkerProperties
+    {
+        public string idMarker { get; set; }
+        public string Velocidad { get; set; }
+        public string Fecha { get; set; }
+
+    }
+
+
 }
-
-
-//{
-//  "type": "Feature",
-//  "geometry": {
-//    "type": "Point",
-//    "coordinates": [125.6, 10.1]
-//  },
-//  "properties": {
-//    "name": "Dinagat Islands"
-//  }
-//}
