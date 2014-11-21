@@ -41,7 +41,7 @@ Ejemplo:
         }
         
         y el Resultado es:
-        
+```        
 {
   "type": "FeatureCollection",
   "features": [
@@ -79,3 +79,4 @@ Ejemplo:
     }
   ]
 }
+```
