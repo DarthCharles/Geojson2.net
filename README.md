@@ -13,7 +13,8 @@ Ejemplo:
  
             List<Feature> features = new List<Feature>();
             
-            //PoligonContainer es una lista de listas de coordenadas, aquí coordenadasPoligono ya fué inicializado
+            //PoligonContainer es una lista de listas de coordenadas,
+            aquí coordenadasPoligono ya fué inicializado
             polygonContainer.Add(coordenadasPoligono);
 
             Feature polygon = new Feature();
