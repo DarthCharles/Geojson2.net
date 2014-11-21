@@ -43,7 +43,7 @@ Ejemplo:
             return Polygon;
         }
 ```        
-        y el Resultado es:
+y el Resultado es:
 ```        
 {
   "type": "FeatureCollection",
