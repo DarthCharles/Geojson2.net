@@ -1,49 +1,35 @@
 Geojson.net
 ===========
 
-Librería para transformar código de C# en formato Geojson.
+##Summary
+Geojson.net2 is an alternative library for transforming a C# object into a Geojson Object
 
-Ejemplo: 
+##Installation
+To start using this libraty all you have to do is install the [GeoJSON.Net2](https://www.nuget.org/packages/GeoJson.net2/) NuGet package:
+
+`PM> Install-Package GeoJson.net2`
+
+
+
+##How to use it
+Example: Just create a geojson object (Point, Polygon or LineString) and pass a coordinates list as an argument. 
 
  ```
- public Geojson getGeofence(int geocercaiID)
+ public Geojson MyPolygon ()
 
         {
 
-            Geojson Polygon = new Geojson();
- 
-            List<Feature> features = new List<Feature>();
-            
-            //PoligonContainer es una lista de listas de coordenadas,
-            aquí coordenadasPoligono ya fué inicializado
-            polygonContainer.Add(coordenadasPoligono);
+            List<LatLng> Coordinates = new List<LatLng>();
+            Coordinates.Add(new LatLng(41.02135510866602, -471.06079101562506));
+            Coordinates.Add(new LatLng(45.01141864227728, -471.06079101562506));
+            Coordinates.Add(new LatLng(45.01141864227728, -464.08447265625));
+            Coordinates.Add(new LatLng(41.02135510866602, -464.08447265625));
+            Coordinates.Add(new LatLng(41.02135510866602, -471.06079101562506));
 
-            Feature polygon = new Feature();
-            polygon.type = "Feature";
-            polygon.geometry = new Geometry
-            {
-                type = "Polygon",
-                coordinates = polygonContainer
-            };
-            polygon.properties = new PolygonProperties()
-            {
-            "FeatureType": Polygon,
-            idGeocerca = 97,
-            Nombre = "Casa de Miguelito",
-            Color = "#fff"
-
-            };
-
-             features.Add(polygon);
-
-
-            Polygon.type = "FeatureCollection";
-            Polygon.features = features;
-
-            return Polygon;
+            return new Polygon(Coordinates);
         }
 ```        
-y el Resultado es:
+you can send the geojson object as an ajax result and use it in your js code, or if you prefer it you can use [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json) to serialize it and get this result:
 ```        
 {
   "type": "FeatureCollection",
@@ -55,31 +41,36 @@ y el Resultado es:
         "coordinates": [
           [
             [
-              -110.997977200896,
-              29.1092151815806
+              -471.06079101562506,
+              41.021355108666022
             ],
             [
-              -110.99763924256,
-              29.1092198684403
+              -471.06079101562506,
+              45.011418642277278
             ],
             [
-              -110.997633878142,
-              29.1087230601246
+              -464.08447265625,
+              45.011418642277278
             ],
             [
-              -110.997966472059,
-              29.1087558682948
+              -464.08447265625,
+              41.021355108666022
+            ],
+            [
+              -471.06079101562506,
+              41.021355108666022
             ]
           ]
         ]
       },
       "properties": {
-        "FeatureType": Polygon,
-        "idGeocerca": "97",
-        "Nombre": "Casa de Miguelito",
-        "Color": "#fff"
+        "FeatureType": "Polygon",
+        "Color": "#3289c7"
       }
     }
   ]
 }
+
 ```
+
+##Thank you!
