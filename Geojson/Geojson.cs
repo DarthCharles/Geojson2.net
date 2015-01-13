@@ -175,7 +175,7 @@ namespace Geojson
 
         }
 
-        public Geojson LinseString(List<LatLng> Coordinates)
+        public Geojson LineString(List<LatLng> Coordinates)
         {
 
             Geojson LineString = new Geojson();

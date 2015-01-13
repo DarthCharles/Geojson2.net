@@ -328,7 +328,7 @@ namespace Geojson
         };
 
             Geojson a = new Geojson();
-
+            a.
 
             List<LatLng> Coordinates = new List<LatLng>();
 
@@ -340,11 +340,11 @@ namespace Geojson
 
             string json = JsonConvert.SerializeObject(a.Point(Coordinates), Formatting.Indented);
             Debug.WriteLine(json);
-            using (StreamWriter writer = new StreamWriter("C:\\Carlos\\important.json"))
-            {
-                writer.Write(json);
+            //using (StreamWriter writer = new StreamWriter("C:\\Carlos\\important.json"))
+            //{
+            //    writer.Write(json);
 
-            }
+            //}
         }
     }
 }
