@@ -11,258 +11,285 @@ namespace Geojson
         public string type { get; set; }
         public List<Feature> features { get; set; }
 
-        public Geojson Point(List<LatLng> Coordinates, Object PointProperties)
+        public Geojson(List<LatLng> Coordinates, string Type)
         {
-            Geojson Point = new Geojson();
-            List<Feature> Features = new List<Feature>();
+            this.type = "FeatureCollection";
 
-            foreach (LatLng latlng in Coordinates)
-            {
-
-                Feature tempFeature = new Feature();
-                tempFeature.type = "Feature";
-                tempFeature.geometry = new Geometry
-                {
-                    type = "Point",
-                    coordinates = new List<double>(){
-                      latlng.lng,
-                      latlng.lat
-                        }
-                };
-
-                tempFeature.properties = PointProperties;
-
-                Features.Add(tempFeature);
-
-            }
-
-            Point.type = "FeatureCollection";
-            Point.features = Features;
-
-            return Point;
-        }
-
-        public Geojson Point(List<LatLng> Coordinates)
-        {
-            Geojson Point = new Geojson();
-            List<Feature> Features = new List<Feature>();
-
-            foreach (LatLng latlng in Coordinates)
-            {
-
-                Feature tempFeature = new Feature();
-                tempFeature.type = "Feature";
-                tempFeature.geometry = new Geometry
-                {
-                    type = "Point",
-                    coordinates = new List<double>(){
-                      latlng.lng,
-                      latlng.lat
-                        }
-                };
-
-                tempFeature.properties = new PointProperties()
-                {
-                    FeatureType = "Point",
-                    Lat = latlng.lat,
-                    Lng = latlng.lng
-                };
-
-                Features.Add(tempFeature);
-
-            }
-
-            Point.type = "FeatureCollection";
-            Point.features = Features;
-
-            return Point;
-
-        }
-
-        public Geojson Polygon(List<LatLng> Coordinates)
-        {
-            Geojson Polygon = new Geojson();
-            List<Feature> Features = new List<Feature>();
-            List<List<Double>> LineCoordinates = new List<List<double>>();
-            List<List<List<Double>>> PolygonContainer = new List<List<List<Double>>>();
-
-            foreach (LatLng latlng in Coordinates)
-            {
-
-                List<double> lista = new List<double>()
-                 {
-                      latlng.lng,
-                      latlng.lat
-                 };
-
-                LineCoordinates.Add(lista);
-
-            }
-
-            PolygonContainer.Add(LineCoordinates);
-
-
-            Feature polygon = new Feature();
-            polygon.type = "Feature";
-
-            polygon.geometry = new Geometry
-             {
-                 type = "Polygon",
-                 coordinates = PolygonContainer
-             };
-
-            polygon.properties = new PolygonProperties()
-            {
-                FeatureType = "Polygon",
-                Area = Math.Abs(Coordinates.Take(Coordinates.Count - 1)
-                .Select((p, i) => (Coordinates[i + 1].lat - p.lat) * (Coordinates[i + 1].lng + p.lng))
-                .Sum() / 2),
-                Color = "#3289c7"
-            };
-
-
-            Features.Add(polygon);
-
-            Polygon.type = "FeatureCollection";
-            Polygon.features = Features;
-
-            return Polygon;
-
-        }
-
-        public Geojson Polygon(List<LatLng> Coordinates, Object PolygonProperties)
-        {
-            Geojson Polygon = new Geojson();
-            List<Feature> Features = new List<Feature>();
-            List<List<Double>> LineCoordinates = new List<List<double>>();
-            List<List<List<Double>>> PolygonContainer = new List<List<List<Double>>>();
-
-            foreach (LatLng latlng in Coordinates)
-            {
-
-                List<double> Points = new List<double>()
-                 {
-                      latlng.lng,
-                      latlng.lat
-                  
-                 };
-
-                LineCoordinates.Add(Points);
-
-            }
-
-            PolygonContainer.Add(LineCoordinates);
-
-
-            Feature polygon = new Feature();
-            polygon.type = "Feature";
-
-            polygon.geometry = new Geometry
-            {
-                type = "Polygon",
-                coordinates = PolygonContainer
-            };
-
-            polygon.properties = PolygonProperties;
-
-
-            Features.Add(polygon);
-
-            Polygon.type = "FeatureCollection";
-            Polygon.features = Features;
-
-            return Polygon;
-
-        }
-
-        public Geojson LineString(List<LatLng> Coordinates)
-        {
-
-            Geojson LineString = new Geojson();
             List<Feature> Features = new List<Feature>();
             List<List<Double>> LineCoordinates = new List<List<double>>();
 
-            foreach (LatLng latlng in Coordinates)
+            switch (Type)
             {
+                case "Point":
 
-                List<double> Points = new List<double>()
-                          {
+                    foreach (LatLng latlng in Coordinates)
+                    {
+
+                        Feature tempFeature = new Feature();
+                        tempFeature.type = "Feature";
+                        tempFeature.geometry = new Geometry
+                        {
+                            type = "Point",
+                            coordinates = new List<double>(){
+                                  latlng.lng,
+                                  latlng.lat
+                            }
+                        };
+
+                        tempFeature.properties = new PointProperties()
+                        {
+                            FeatureType = "Point",
+                            Lat = latlng.lat,
+                            Lng = latlng.lng
+                        };
+
+                        Features.Add(tempFeature);
+
+                    }
+
+                    this.features = Features;
+
+                    break;
+
+                case "Polygon":
+
+                    List<List<List<Double>>> PolygonContainer = new List<List<List<Double>>>();
+
+                    foreach (LatLng latlng in Coordinates)
+                    {
+
+                        List<double> lista = new List<double>(){
+                              latlng.lng,
+                              latlng.lat
+                         };
+
+                        LineCoordinates.Add(lista);
+
+                    }
+
+                    PolygonContainer.Add(LineCoordinates);
+
+                    Feature polygon = new Feature();
+                    polygon.type = "Feature";
+
+                    polygon.geometry = new Geometry
+                    {
+                        type = "Polygon",
+                        coordinates = PolygonContainer
+                    };
+
+                    polygon.properties = new PolygonProperties()
+                    {
+                        FeatureType = "Polygon",
+                        Color = "#3289c7"
+                    };
+
+
+                    Features.Add(polygon);
+
+                    this.features = Features;
+
+                    break;
+
+                case "LineString":
+
+                    foreach (LatLng latlng in Coordinates)
+                    {
+
+                        List<double> Points = new List<double>(){
                             latlng.lng,
                             latlng.lat
                           };
 
-                LineCoordinates.Add(Points);
+                        LineCoordinates.Add(Points);
+                    }
+
+                    Feature linea = new Feature();
+                    linea.type = "Feature";
+
+                    linea.geometry = new Geometry
+                    {
+                        type = "LineString",
+                        coordinates = LineCoordinates
+                    };
+
+                    linea.properties = new PolylineProperties()
+                    {
+                        FeatureType = "LineString",
+                        Color = "#3289c7"
+
+                    };
+                    Features.Add(linea);
+                    this.features = Features;
+
+                    break;
+
+                default:
+                    this.features = new List<Feature>();
+                    break;
             }
 
-            Feature linea = new Feature();
-            linea.type = "Feature";
-
-            linea.geometry = new Geometry
-            {
-                type = "LineString",
-                coordinates = LineCoordinates
-            };
-
-            linea.properties = new PolylineProperties()
-            {
-                FeatureType = "LineString",
-                Color = "#3289c7"
-
-            };
-            Features.Add(linea);
-
-            LineString.type = "FeatureCollection";
-            LineString.features = Features;
-
-
-            return LineString;
         }
 
-                public Geojson LinseString(List<LatLng> Coordinates, Object PolylineProperties)
+        public Geojson(List<LatLng> Coordinates, Object GeojsonProperties, string Type)
         {
+            this.type = "FeatureCollection";
 
-            Geojson LineString = new Geojson();
             List<Feature> Features = new List<Feature>();
             List<List<Double>> LineCoordinates = new List<List<double>>();
 
-            foreach (LatLng latlng in Coordinates)
+            switch (Type)
             {
+                case "Point":
 
-                List<double> Points = new List<double>()
-                          {
+                    foreach (LatLng latlng in Coordinates)
+                    {
+
+                        Feature tempFeature = new Feature();
+                        tempFeature.type = "Feature";
+                        tempFeature.geometry = new Geometry
+                        {
+                            type = "Point",
+                            coordinates = new List<double>(){
+                                  latlng.lng,
+                                  latlng.lat
+                            }
+                        };
+
+                        tempFeature.properties = GeojsonProperties;
+
+                        Features.Add(tempFeature);
+
+                    }
+
+                    this.features = Features;
+
+                    break;
+
+                case "Polygon":
+
+                    List<List<List<Double>>> PolygonContainer = new List<List<List<Double>>>();
+
+                    foreach (LatLng latlng in Coordinates)
+                    {
+
+                        List<double> lista = new List<double>(){
+                              latlng.lng,
+                              latlng.lat
+                         };
+
+                        LineCoordinates.Add(lista);
+
+                    }
+
+                    PolygonContainer.Add(LineCoordinates);
+
+                    Feature polygon = new Feature();
+                    polygon.type = "Feature";
+
+                    polygon.geometry = new Geometry
+                    {
+                        type = "Polygon",
+                        coordinates = PolygonContainer
+                    };
+
+                    polygon.properties = GeojsonProperties;
+
+
+                    Features.Add(polygon);
+
+                    this.features = Features;
+
+                    break;
+
+                case "LineString":
+
+                    foreach (LatLng latlng in Coordinates)
+                    {
+
+                        List<double> Points = new List<double>(){
                             latlng.lng,
                             latlng.lat
                           };
 
-                LineCoordinates.Add(Points);
+                        LineCoordinates.Add(Points);
+                    }
+
+                    Feature linea = new Feature();
+                    linea.type = "Feature";
+
+                    linea.geometry = new Geometry
+                    {
+                        type = "LineString",
+                        coordinates = LineCoordinates
+                    };
+
+                    linea.properties = GeojsonProperties;
+
+                    Features.Add(linea);
+
+                    this.features = Features;
+
+                    break;
+
+                default:
+                    this.features = new List<Feature>();
+                    break;
             }
-
-            Feature linea = new Feature();
-            linea.type = "Feature";
-
-            linea.geometry = new Geometry
-            {
-                type = "LineString",
-                coordinates = LineCoordinates
-            };
-
-            linea.properties = PolylineProperties;
-
-            Features.Add(linea);
-
-            LineString.type = "FeatureCollection";
-            LineString.features = Features;
-
-
-            return LineString;
         }
-
-
-    
 
     }
 
+    public class Point : Geojson
+    {
+        public Point(List<LatLng> Coordinates)
+            : base(Coordinates, "Point")
+        {
 
+        }
+
+        public Point(List<LatLng> Coordinates, Object PointProperties)
+            : base(Coordinates, PointProperties, "Point")
+        {
+
+        }
+    }
+
+    public class Polygon : Geojson
+    {
+
+        public Polygon(List<LatLng> Coordinates)
+            : base(Coordinates, "Polygon")
+        {
+
+        }
+
+
+        public Polygon(List<LatLng> Coordinates, Object PolygonProperties)
+            : base(Coordinates, PolygonProperties, "Polygon")
+        {
+
+        }
+    }
+
+    public class LineString : Geojson
+    {
+
+        public LineString(List<LatLng> Coordinates)
+            : base(Coordinates, "LineString")
+        {
+
+        }
+
+
+        public LineString(List<LatLng> Coordinates, Object PolylineProperties)
+            : base(Coordinates, PolylineProperties, "LineString")
+        {
+
+
+        }
+
+    }
 
     public class LatLng
     {
@@ -277,13 +304,13 @@ namespace Geojson
 
 
     }
+
     public class Feature
     {
         public string type { get; set; }
         public Geometry geometry { get; set; }
         public Object properties { get; set; }
     }
-
 
     public class Geometry
     {
@@ -292,11 +319,9 @@ namespace Geojson
 
     }
 
-
     public class PolylineProperties
     {
         public string FeatureType { get; set; }
-        public Double Distance { get; set; }
         public string Color { get; set; }
 
     }
@@ -304,7 +329,6 @@ namespace Geojson
     public class PolygonProperties
     {
         public string FeatureType { get; set; }
-        public Double Area { get; set; }
         public string Color { get; set; }
 
     }
