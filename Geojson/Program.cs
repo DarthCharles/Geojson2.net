@@ -25,9 +25,17 @@ namespace Geojson
             Coordinates.Add(new LatLng(41.02135510866602, -464.08447265625));
             Coordinates.Add(new LatLng(41.02135510866602, -471.06079101562506));
 
-            Geojson MyPolygon = new LineString(Coordinates);
 
-            string json = JsonConvert.SerializeObject(MyPolygon, Formatting.Indented);
+
+
+            GeojsonElement Point = new GeojsonElement(Coordinates, "Point");
+            GeojsonElement LineString = new GeojsonElement(Coordinates, "LineString");
+            GeojsonElement Polygon = new GeojsonElement(Coordinates, "Polygon");
+
+            Feature a = new Feature();
+
+            Geojson MyPolygon = new Geojson(a.Features(Point));
+           string json = JsonConvert.SerializeObject(MyPolygon, Formatting.Indented);
             Debug.WriteLine(json);
             using (StreamWriter writer = new StreamWriter("C:\\Carlos\\important.json"))
             {

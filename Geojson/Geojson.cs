@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,26 @@ namespace Geojson
 {
     public class Geojson
     {
-        public string type { get; set; }
-        public List<Feature> features { get; set; }
+        private string Type;
+        private List<Feature> Features;
+
+        public string type
+        {
+            get { return Type; }
+            set { Type = value; }
+        }
+
+        public List<Feature> features
+        {
+            get { return Features; }
+            set { Features = value; }
+        }
+
+        public Geojson(List<Feature> Features)
+        {
+            this.type = "FeatureCollection";
+            this.features = Features;
+        }
 
         public Geojson(List<LatLng> Coordinates, string Type)
         {
@@ -310,8 +329,144 @@ namespace Geojson
         public string type { get; set; }
         public Geometry geometry { get; set; }
         public Object properties { get; set; }
+
+        public List<Feature> Features (params GeojsonElement[] list)
+        {
+            List<Feature> Features = new List<Feature>();
+            List<List<Double>> LineCoordinates = new List<List<double>>();
+            List<List<List<Double>>> PolygonContainer = new List<List<List<Double>>>();
+
+            foreach (GeojsonElement item in list)
+            {
+                switch (item.Type)
+                {
+                    case "Point":
+
+                        foreach (LatLng latlng in item.Coordinates)
+                        {
+
+                            Feature tempFeature = new Feature();
+                            tempFeature.type = "Feature";
+                            tempFeature.geometry = new Geometry
+                            {
+                                type = "Point",
+                                coordinates = new List<double>(){
+                                  latlng.lng,
+                                  latlng.lat
+                            }
+                            };
+
+                            tempFeature.properties = new PointProperties()
+                            {
+                                FeatureType = "Point",
+                                Lat = latlng.lat,
+                                Lng = latlng.lng
+                            };
+
+                            Features.Add(tempFeature);
+                        }
+
+                        break;
+
+                    case "Polygon":
+
+
+                        foreach (LatLng latlng in item.Coordinates)
+                        {
+
+                            List<double> lista = new List<double>(){
+                              latlng.lng,
+                              latlng.lat
+                         };
+
+                            LineCoordinates.Add(lista);
+
+                        }
+
+                        PolygonContainer.Add(LineCoordinates);
+
+                        Feature polygon = new Feature();
+                        polygon.type = "Feature";
+
+                        polygon.geometry = new Geometry
+                        {
+                            type = "Polygon",
+                            coordinates = PolygonContainer
+                        };
+
+                        polygon.properties = new PolygonProperties()
+                        {
+                            FeatureType = "Polygon",
+                            Color = "#3289c7"
+                        };
+
+                        Features.Add(polygon);
+                        break;
+
+                    case "LineString":
+                        foreach (LatLng latlng in item.Coordinates)
+                        {
+
+                            List<double> Points = new List<double>(){
+                            latlng.lng,
+                            latlng.lat
+                          };
+
+                            LineCoordinates.Add(Points);
+                        }
+
+                        Feature linea = new Feature();
+                        linea.type = "Feature";
+
+                        linea.geometry = new Geometry
+                        {
+                            type = "LineString",
+                            coordinates = LineCoordinates
+                        };
+
+                        linea.properties = new PolylineProperties()
+                        {
+                            FeatureType = "LineString",
+                            Color = "#3289c7"
+
+                        };
+                        Features.Add(linea);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            return Features;
+        }
+
     }
 
+    public class GeojsonElement
+    {
+        private List<LatLng> coordinates;
+        private string type;
+
+        public List<LatLng> Coordinates
+        {
+            get { return coordinates; }
+            set { coordinates = value; }
+        }
+        public string Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+
+        public GeojsonElement(List<LatLng> Coordinates, string Type)
+        {
+            this.coordinates = Coordinates;
+            this.type = Type;
+        }
+
+
+    }
     public class Geometry
     {
         public string type { get; set; }
