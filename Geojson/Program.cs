@@ -11,44 +11,23 @@ using System.Threading.Tasks;
 
 namespace Geojson
 {
-    class venus
-    {
-        public string MyProperty { get; set; }
-        public string MyProperty1 { get; set; }
-    }
-    class Program
+     class Program
     {
 
         static void Main(string[] args)
         {
 
 
-            List<double> coordenadas = new List<double> {
-              -110.96410274505615,
-              29.077048924872127,
-             -110.96410274505615,
-              29.0780053385589,
-              -110.96272945404053,
-              29.0780053385589,
-              -110.96272945404053,
-              29.077048924872127,
-              -110.96410274505615,
-              29.077048924872127
-        };
-
-
-
-
             List<LatLng> Coordinates = new List<LatLng>();
+            Coordinates.Add(new LatLng(41.02135510866602, -471.06079101562506));
+            Coordinates.Add(new LatLng(45.01141864227728, -471.06079101562506));
+            Coordinates.Add(new LatLng(45.01141864227728, -464.08447265625));
+            Coordinates.Add(new LatLng(41.02135510866602, -464.08447265625));
+            Coordinates.Add(new LatLng(41.02135510866602, -471.06079101562506));
 
-            for (int i = 0; i < coordenadas.Count - 1; i += 2)
-            {
-                Coordinates.Add(new LatLng(coordenadas[i + 1], coordenadas[i]));
-            }
+            Geojson MyPolygon = new LineString(Coordinates);
 
-            Geojson a = new Point(Coordinates, "Point");
-
-            string json = JsonConvert.SerializeObject(a, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(MyPolygon, Formatting.Indented);
             Debug.WriteLine(json);
             using (StreamWriter writer = new StreamWriter("C:\\Carlos\\important.json"))
             {
