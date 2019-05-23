@@ -1,17 +1,17 @@
 Geojson.net2
 ===========
 
-##Summary
+## Summary
 Geojson.net2 is an alternative library for transforming a C# object into a Geojson Object
 
-##Installation
+## Installation
 To start using this libraty all you have to do is install the [GeoJSON.Net2](https://www.nuget.org/packages/GeoJson.net2/) NuGet package:
 
 `PM> Install-Package GeoJson.net2`
 
 
 
-##How to use it
+## How to use it
 Example: Just create a geojson object (Point, Polygon or LineString) and pass a coordinates list as an argument. 
 
  ```
@@ -73,4 +73,4 @@ you can send the geojson object as an ajax result and use it in your js code, or
 
 ```
 
-##Thank you!
+## Thank you!
